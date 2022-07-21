@@ -1,44 +1,62 @@
-/* Q-6) Report the number of
-        times the dice was
-        played to win the game
-        and also the position
-        after every die role.
+/* Q-7) Play the game with 2 Player. In this case if a
+       Player gets a Ladder then plays again.
+       Finally report which. Player won the game
 */
 package com.bridzelab.SnakeAndLadder;
 import java.util.Random;  
 public class SnakeNLadder {
 	public static void main(String[] args) {
-		int position = 0;
-        final int NO_PLAY=1;  // no of player
-        final int LADDER=2;   // ladder will award you reward
-        final int SNAKE=3;    // Snake take your life
-        int dieRolls = 0;
+		 int player1 = 0;  //player 1
+	        int player2 = 0;  //player 2
+	        boolean is_Player_1 = true;    //conditional initializer
+	        final int NO_PLAY=1;
+	        final int LADDER=2;    //Ladder will give you reward
+	        final int SNAKE=3;     // Snake will take your life
+	        int dieRolls = 0;
 
-        Random rand = new Random();  //Random obj initializer
+	        Random rand = new Random();
 
-        while(position<100) {
-            int dice = rand.nextInt(6) + 1;
-            dieRolls += 1;
-            int options = rand.nextInt(3) + 1;
+	        while(player1<100 && player2<100) {
 
-            switch (options) {
-                case NO_PLAY: break;
-                case LADDER:
-                    if (position + dice <= 100) {
-                        position += dice;
-                    }
-                    break;
-                case SNAKE:
-                    if (position - dice >= 0) {
-                        position -= dice;
-                    } else
-                        position = 0;
-                    break;
-            }
-            System.out.println("Current position is: "+position);
-        }
-        System.out.println("Number of times die has rolled: "+dieRolls);
-        System.out.println("Player has WON!!!");
+	            int dice = rand.nextInt(6) + 1;
+	            dieRolls += 1;
+	            int options = rand.nextInt(3) + 1;
 
-    }
-}
+	            switch (options) {
+	                case NO_PLAY: break;
+	                case LADDER:
+	                    if(is_Player_1) {
+	                        if (player1 + dice <= 100) {
+	                            player1 += dice;
+	                            is_Player_1=false;
+	                        }
+	                    }else
+	                    if (player2 + dice <=100) {
+	                        player2 += dice;
+	                        is_Player_1=true;
+	                    }
+	                    break;
+	                case SNAKE:
+	                    if(is_Player_1){
+	                        if (player1 - dice >= 0) {
+	                            player1 -= dice;
+	                        }else
+	                            player1=0;
+	                    }else
+	                    if(player2 - dice >= 0) {
+	                        player2 -= dice;
+	                    }else
+	                        player2=0;
+	                    break;
+	            }
+	            is_Player_1= !is_Player_1;
+	            System.out.println("Current positions of player1 and player2 are: "+player1+"and "+player2);
+	        }
+	        System.out.println("Number of times die has rolled: "+dieRolls);
+	        if (player1==100){
+	            System.out.println("Player1 has WON!");
+	        }else
+	            System.out.println("Player2 has WON!");
+
+	    }
+	}
