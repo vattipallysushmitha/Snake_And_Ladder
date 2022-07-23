@@ -1,44 +1,34 @@
-/* Q-3)The Player then checks for a Option. They are No Play,
-        Ladder or Snake.
-        - Use ((RANDOM)) to check for Options - In Case of No Play the player
-        stays in the same position
-        - In Case of Ladder the player moves ahead by the
-          number of position received in the die
-        -  In Case of Snake the player moves behind by the
-          number of position received in the die
-*/
-
 package com.bridzelab.SnakeAndLadder;
-import java.util.Random;  // import random
-public class SnakeNLadder {
-	public static void main(String[] args) {
-		int position = 0;
-        final int NO_PLAY=1;
-        final int LADDER=2;
-        final int SNAKE=3;
+public class SnakeNLadder 
+{
+	 public static final int startPosition = 0;
+		public static void main(String[] args) 
+		{
+	      int dieRoll;
+	      int currentPosition = 0;
+	      int playerPosition = startPosition;
+			dieRoll = (int)(Math.random()*6) + 1;
+	      
 
-        Random rand = new Random();  // Make Random object
+	      System.out.println("The die comes up " + dieRoll);
+	     
+	      int option = (int)(Math.random()*3);
+	      if(option==0)
+	      {
+	          System.out.println("No Play");
+	          currentPosition = startPosition;
 
-        int dice = rand.nextInt(6) + 1;  //Input random integer
-
-        int options = rand.nextInt(3) + 1;
-
-        switch (options) {
-            case NO_PLAY:
-                break;
-            case LADDER:
-                if (position + dice <= 100) {
-                    position += dice;
-                }
-                break;
-            case SNAKE:
-                if (position - dice >= 0) {
-                    position -= dice;
-                } else
-                    position = 0;
-                break;
-        }
-        System.out.println("Current position is: "+position);
-        }
-
-}
+	      }
+	      else if(option==1)
+	      {
+	          System.out.println("Got Ladder");
+	          currentPosition += dieRoll;
+	      }
+	      else if(option==2)
+	      {
+	          System.out.println("Snake attacked");
+	          currentPosition -= dieRoll;
+	      }
+	      System.out.println("New Player position is: " + currentPosition);
+		}
+	}
