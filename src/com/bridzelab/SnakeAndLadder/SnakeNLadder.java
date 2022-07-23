@@ -1,44 +1,85 @@
-/* Q-6) Report the number of
-        times the dice was
-        played to win the game
-        and also the position
-        after every die role.
-*/
+
+
+
 package com.bridzelab.SnakeAndLadder;
-import java.util.Random;  
-public class SnakeNLadder {
-	public static void main(String[] args) {
-		int position = 0;
-        final int NO_PLAY=1;  // no of player
-        final int LADDER=2;   // ladder will award you reward
-        final int SNAKE=3;    // Snake take your life
-        int dieRolls = 0;
+public class SnakeNLadder
 
-        Random rand = new Random();  //Random obj initializer
 
-        while(position<100) {
-            int dice = rand.nextInt(6) + 1;
-            dieRolls += 1;
-            int options = rand.nextInt(3) + 1;
+{
+	public static final int startPosition = 0;
+	   public static final int winningPosition = 100;
+		public static void main(String[] args) 
+		
+		{
+	      int dieRoll;
+	      int dieRollCount = 0;
 
-            switch (options) {
-                case NO_PLAY: break;
-                case LADDER:
-                    if (position + dice <= 100) {
-                        position += dice;
-                    }
-                    break;
-                case SNAKE:
-                    if (position - dice >= 0) {
-                        position -= dice;
-                    } else
-                        position = 0;
-                    break;
-            }
-            System.out.println("Current position is: "+position);
-        }
-        System.out.println("Number of times die has rolled: "+dieRolls);
-        System.out.println("Player has WON!!!");
 
-    }
-}
+	      int playerPosition = 0;
+			
+	      
+	      
+	      
+	      while (playerPosition < winningPosition)
+	      {
+	    	  
+	    	  
+	          dieRollCount++;
+	          System.out.println("Dice count is: " + dieRollCount);
+	          dieRoll = (int)(Math.random()*6) + 1;
+	          System.out.println("The die comes up " + dieRoll);
+	          int option = (int)(Math.random()*3);
+	          if(option==0)
+	          {
+	        	  
+	        	  
+	             System.out.println("No Play");
+	             playerPosition = playerPosition;
+
+
+	          }
+	          
+	          
+	          else if(option==1)
+	          {
+	        	  
+	        	  
+	             System.out.println("Got Ladder");
+	             playerPosition += dieRoll;
+	             if(playerPosition > 100)
+	             {
+	            	 
+	            	 
+	                   playerPosition -= dieRoll;
+	             }
+	             
+
+	          }
+	          
+	          
+	          else if(option==2)
+	          {
+	        	  
+	        	  
+	             System.out.println("Snake attacked");
+	             playerPosition -= dieRoll;
+	             if(playerPosition < 0)
+	             {
+	                
+	            	 
+	            	 playerPosition = 0;
+	             }
+
+	          }
+	          
+	          
+	          System.out.println("New Player position is: " + playerPosition);
+	          if(playerPosition == 100)
+	          {
+	        	  
+	        	  
+	             System.out.println("reached to Winning Position");
+	          }
+	      }
+		}
+	}
